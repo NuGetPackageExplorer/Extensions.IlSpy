@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>PackageExplorer.Extensions.ILSpy</id>
+    <version>1.2.1</version>
+    <title>NuGet Package Explorer ILSpy Extension</title>
+    <authors>Xavier Decoster</authors>
+    <owners>Xavier Decoster</owners>
+    <projectUrl>http://npeilspy.codeplex.com</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This extension to NuGet Package Explorer allows you to quickly open dll's from the package into ILSpy, without the need to extract the package, go into explorer, and open it up manually.</description>
+    <summary>NuGet Package Explorer extension that allows you to disassemble dll's in ILSpy.</summary>
+    <releaseNotes>Upgraded dependency NuGetPackageExplorer.Types to v3.0.0.0</releaseNotes>
+    <copyright>Xavier Decoster</copyright>
+    <tags>NuGet,ILSpy,Package Explorer,Extension</tags>
+  </metadata>
+  <files>
+    <file src="PackageExplorer.Extensions.ILSpy\bin\release\PackageExplorer.Extensions.ILSpy.dll"
+          target="lib\net40"/>
+  </files>
+</package>
