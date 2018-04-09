@@ -13,7 +13,7 @@
     <Title>NuGet Package Explorer ILSpy Extension</Title>
     <Authors>Xavier Decoster</Authors>
     <Description>This extension to NuGet Package Explorer allows you to quickly open dll's from the package into ILSpy, without the need to extract the package, go into explorer, and open it up manually.</Description>
-    <PackageProjectUrl>http://npeilspy.codeplex.com</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/NuGetPackageExplorer/Extensions.IlSpy</PackageProjectUrl>
     <PackageReleaseNotes>Upgraded dependency NuGetPackageExplorer.Types to v3.0.0.0</PackageReleaseNotes>
     <Copyright>Xavier Decoster</Copyright>
     <PackageTags>NuGet,ILSpy,Package Explorer,Extension</PackageTags>
