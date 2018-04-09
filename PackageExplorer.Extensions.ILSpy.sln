@@ -1,13 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageExplorer.Extensions.ILSpy", "PackageExplorer.Extensions.ILSpy\PackageExplorer.Extensions.ILSpy.csproj", "{CA8C8380-525C-4D56-B438-04933406F440}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{98751816-E1FB-482D-B9E5-4394FB8FCC66}"
-	ProjectSection(SolutionItems) = preProject
-		nuspec.xsd = nuspec.xsd
-		PackageExplorer.Extensions.ILSpy.nuspec = PackageExplorer.Extensions.ILSpy.nuspec
-	EndProjectSection
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PackageExplorer.Extensions.ILSpy", "PackageExplorer.Extensions.ILSpy\PackageExplorer.Extensions.ILSpy.csproj", "{CA8C8380-525C-4D56-B438-04933406F440}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {816CA2DB-178A-4A6C-A881-A1DB13E593C5}
 	EndGlobalSection
 EndGlobal
