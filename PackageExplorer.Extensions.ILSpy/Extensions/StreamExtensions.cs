@@ -7,14 +7,12 @@ namespace System.IO
     {
         public static byte[] ToByteArray(this Stream stream)
         {
-            var streamLength = Convert.ToInt32(stream.Length);
-            byte[] data = new byte[streamLength + 1];
+            using (var ms = new MemoryStream())
+            {
+                stream.CopyTo(ms);
 
-            //convert to to a byte array
-            stream.Read(data, 0, streamLength);
-            stream.Close();
-
-            return data;
+                return ms.ToArray();
+            }
         }
     }
 }
