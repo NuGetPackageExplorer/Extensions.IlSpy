@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using NuGetPackageExplorer.Types;
@@ -8,25 +9,27 @@ namespace PackageExplorer.Extensions.ILSpy
     [PackageContentViewerMetadata(0, ".dll")]
     internal class ILSpyPackageContentViewer : IPackageContentViewer
     {
-        private ConfigurationControl configControl;
-        private Window dialog;
+        private ConfigurationControl _configControl;
+        private Window _dialog;
 
-        public object GetView(string extension, Stream stream)
+        public object GetView(IPackageContent selectedFile, IReadOnlyList<IPackageContent> peerFiles)
         {
             try
             {
-                configControl = new ConfigurationControl(extension, stream);
-                dialog = new Window();
-                dialog.Content = configControl;
-                dialog.Topmost = true;
-                dialog.Width = 300;
-                dialog.Height = 120;
-                dialog.ResizeMode = ResizeMode.NoResize;
-                dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                dialog.ShowInTaskbar = false;
-                dialog.ShowDialog();
+                _configControl = new ConfigurationControl(selectedFile.Extension, selectedFile.GetStream());
+                _dialog = new Window
+                {
+                    Content = _configControl,
+                    Topmost = true,
+                    Width = 300,
+                    Height = 120,
+                    ResizeMode = ResizeMode.NoResize,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    ShowInTaskbar = false
+                };
+                _dialog.ShowDialog();
 
-                return configControl.Assembly.FullName;
+                return _configControl.Assembly.FullName;
             }
             catch (Exception exception)
             {

@@ -1,20 +1,21 @@
-﻿// ReSharper disable CheckNamespace
-// Note: Extensions have been put in the namespace of the extended Type to ease discoverability.
-namespace System.IO
-// ReSharper restore CheckNamespace
+﻿using System.IO;
+
+namespace PackageExplorer.Extensions.ILSpy
 {
     internal static class StreamExtensions
     {
         public static byte[] ToByteArray(this Stream stream)
         {
-            var streamLength = Convert.ToInt32(stream.Length);
-            byte[] data = new byte[streamLength + 1];
+            using var newStream = new MemoryStream();
 
-            //convert to to a byte array
-            stream.Read(data, 0, streamLength);
-            stream.Close();
-
-            return data;
+            var buffer = new byte[2048]; // 2KB
+            int read;
+            while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                newStream.Write(buffer, 0, read);
+            }
+            var result = newStream.ToArray();
+            return result;
         }
     }
 }
