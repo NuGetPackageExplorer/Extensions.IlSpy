@@ -1,0 +1,19 @@
+trigger:
+- master
+- rel/*
+
+pr:
+- master
+- rel/*
+
+variables:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  BuildConfiguration: Release
+
+pool:
+  vmImage: windows-2019
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
