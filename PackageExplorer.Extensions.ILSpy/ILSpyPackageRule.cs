@@ -1,9 +1,9 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using NuGet;
 using NuGetPackageExplorer.Types;
+using NuGetPe;
 
-namespace PackageExplorer.Extensions.ILSpy 
+namespace PackageExplorer.Extensions.ILSpy
 {
     [Export(typeof(IPackageRule))]
     internal class ILSpyPackageRule : IPackageRule

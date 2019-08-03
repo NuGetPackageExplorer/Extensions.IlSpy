@@ -114,7 +114,7 @@ namespace PackageExplorer.Extensions.ILSpy
 
         private void HandleException(Exception exception)
         {
-            MessageBox.Show("Please report this exception on http://npeilspy.codeplex.com.\n\nMessage: " + exception.Message, "Oops! Unexpected exception of type " + exception.GetType().Name,
+            MessageBox.Show("Please report this exception on https://github.com/NuGetPackageExplorer/Extensions.IlSpy.\n\nMessage: " + exception.Message, "Oops! Unexpected exception of type " + exception.GetType().Name,
                                 MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
