@@ -20,6 +20,8 @@ steps:
     verbosityRestore: minimal
     command: 'restore'
     projects: '$(solution)'
+    selectOrConfig: 'config'
+    nugetConfigPath: '$(System.DefaultWorkingDirectory)/NuGet.Config'
 
 - task: DotNetCoreCLI@2
   displayName: 'Build'
