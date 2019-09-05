@@ -1,19 +1,28 @@
-trigger:
-- master
-- rel/*
-
-pr:
-- master
-- rel/*
-
-variables:
-  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-  BuildConfiguration: Release
-
 pool:
   vmImage: windows-2019
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
+steps:
+- task: UseDotNet@2
+  displayName: 'Use .Net Core sdk 3.x'
+  inputs:
+    version: 3.x
+    includePreviewVersions: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'Restore'
+  inputs:
+    verbosityRestore: minimal
+    command: 'restore'
+    projects: '$(solution)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
+  inputs:
+    command: 'build'
+    projects: '$(solution)'
