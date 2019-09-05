@@ -9,7 +9,7 @@ namespace PackageExplorer.Extensions.ILSpy
 {
     public partial class ConfigurationControl
     {
-        private string assemblyPath;
+        private string _assemblyPath;
 
         public ConfigurationControl()
         {
@@ -26,15 +26,18 @@ namespace PackageExplorer.Extensions.ILSpy
         {
             try
             {
-                byte[] assemblyRawData = stream.ToByteArray();
+
+
+
+                var assemblyRawData = stream.ToByteArray();
 
                 Assembly = Assembly.Load(assemblyRawData);
 
-                string assemblyFileName = string.Format("{0}{1}", Assembly.GetName().Name, extension);
-                assemblyPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), assemblyFileName);
+                var assemblyFileName = $"{Assembly.GetName().Name}{extension}";
+                _assemblyPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), assemblyFileName);
 
-                FileStream file = File.Create(assemblyPath);
-                MemoryStream assemblyMemoryStream = new MemoryStream(assemblyRawData);
+                var file = File.Create(_assemblyPath);
+                var assemblyMemoryStream = new MemoryStream(assemblyRawData);
                 assemblyMemoryStream.CopyTo(file);
                 file.Close();
             }
@@ -46,18 +49,17 @@ namespace PackageExplorer.Extensions.ILSpy
 
         public Assembly Assembly { get; private set; }
 
-        private Window ParentWindow { get { return Parent as Window; } }
+        private Window ParentWindow => Parent as Window;
 
         private void OnButtonOKClick(object sender, RoutedEventArgs e)
         {
             Path = txtPath.Text.Trim();
 
-            if(IsPathToILSpyValid())
+            if (IsPathToILSpyValid())
             {
-                Process.Start(Path, assemblyPath);
+                Process.Start(Path, _assemblyPath);
 
-                var window = Parent as Window;
-                if (window != null) window.Close();
+                if (Parent is Window window) window.Close();
             }
             else
             {
@@ -71,7 +73,7 @@ namespace PackageExplorer.Extensions.ILSpy
             if (string.IsNullOrWhiteSpace(Path))
                 return false;
 
-            if (!Path.ToLowerInvariant().EndsWith("ilspy.exe"))
+            if (!Path.EndsWith("ilspy.exe",StringComparison.OrdinalIgnoreCase))
                 return false;
 
             return true;
@@ -83,11 +85,13 @@ namespace PackageExplorer.Extensions.ILSpy
         {
             try
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "ILSpy|ILSpy.exe";
-                openFileDialog.FilterIndex = 1;
-                openFileDialog.ShowReadOnly = true;
-                openFileDialog.Multiselect = false;
+                var openFileDialog = new OpenFileDialog
+                {
+                    Filter = "ILSpy|ILSpy.exe",
+                    FilterIndex = 1,
+                    ShowReadOnly = true,
+                    Multiselect = false
+                };
                 if (openFileDialog.ShowDialog() == true)
                 {
                     txtPath.Text = openFileDialog.FileName;
@@ -103,8 +107,7 @@ namespace PackageExplorer.Extensions.ILSpy
         {
             try
             {
-                if (ParentWindow != null)
-                    ParentWindow.Close();
+                ParentWindow?.Close();
             }
             catch (Exception exception)
             {
@@ -114,7 +117,7 @@ namespace PackageExplorer.Extensions.ILSpy
 
         private void HandleException(Exception exception)
         {
-            MessageBox.Show("Please report this exception on http://npeilspy.codeplex.com.\n\nMessage: " + exception.Message, "Oops! Unexpected exception of type " + exception.GetType().Name,
+            MessageBox.Show("Please report this exception on https://github.com/NuGetPackageExplorer/Extensions.IlSpy.\n\nMessage: " + exception, "Oops! Unexpected exception of type " + exception.GetType().Name,
                                 MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
